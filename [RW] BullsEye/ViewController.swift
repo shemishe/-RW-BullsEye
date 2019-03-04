@@ -69,13 +69,14 @@ class ViewController: UIViewController {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
-        let action = UIAlertAction(title: "Great!", style: .default, handler: nil)
+        let action = UIAlertAction(title: "Great!", style: .default, handler: {
+            action in
+            self.startNewRound()
+        })
         
         alert.addAction(action)
         
         present(alert, animated: true, completion: nil)
-        
-        startNewRound()
         
     }    
 
@@ -84,6 +85,14 @@ class ViewController: UIViewController {
         let roundedValue = sender.value.rounded()
         
         currentValue = Int(roundedValue)
+        
+    }
+    
+    @IBAction func startOverButton(_ sender: Any) {
+        
+        startOver()
+        startNewRound()
+        updateLabels()
         
     }
     
@@ -101,6 +110,13 @@ class ViewController: UIViewController {
         targetValueLabel.text = String(targetValue)
         scoreLabel.text = String(score)
         roundLabel.text = String(round)
+        
+    }
+    
+    func startOver() {
+        
+        score = 0
+        round = 1
         
     }
     
